@@ -24,3 +24,4 @@ fflogs_wrapper-*.tar
 
 /config/config.exs
 
+.elixir_ls
