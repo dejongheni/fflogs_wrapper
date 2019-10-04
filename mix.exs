@@ -13,14 +13,15 @@ defmodule FflogsWrapper.MixProject do
 
   def application do
     [
-      applications: [:httpoison]
+      applications: [:httpoison, :rate_limitator]
     ]
   end
 
   defp deps do
     [
       {:httpoison, "~> 1.6"},
-      {:poison, "~> 3.1"}
+      {:poison, "~> 3.1"},
+      {:rate_limitator, git: "https://github.com/Gurimarukin/rate_limitator.git", tag: "1.1.0"}
     ]
   end
 end

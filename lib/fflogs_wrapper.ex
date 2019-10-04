@@ -7,7 +7,15 @@ defmodule FflogsWrapper do
 
     parameters = Map.put(parameters, :api_key, token)
 
-    {:ok, request} = HTTPoison.get(base_url <> url, [{"Accept", "application/json"}], params: parameters)
+    {:ok, request} =
+      RateLimitator.with_limit(
+        :get_fflogs,
+        fn -> HTTPoison.get(base_url <> url, [{"Accept", "application/json"}], params: parameters) end,
+        max_demand: Application.get_env(:fflogs_wrapper, :max_demand),
+        interval: Application.get_env(:fflogs_wrapper, :interval)
+      )
+      |> Task.await
+
     Poison.decode!(request.body)
   end
 end
