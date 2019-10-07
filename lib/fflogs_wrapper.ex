@@ -1,6 +1,5 @@
 defmodule FflogsWrapper do
 
-  @spec get(String.t, map) :: map
   def get(url, parameters \\ %{}) do
     base_url = Application.get_env(:fflogs_wrapper, :base_url)
     token = Application.get_env(:fflogs_wrapper, :token)
